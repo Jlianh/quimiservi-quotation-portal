@@ -45,7 +45,6 @@ export class ProductDetail {
 
   protected readonly badges = [
     { icon: BadgeCheck, label: 'Certificado INVIMA' },
-    { icon: Truck, label: 'Envío 24–48 h' },
     { icon: Beaker, label: 'Soporte técnico' },
   ];
 
