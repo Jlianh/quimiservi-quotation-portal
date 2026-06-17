@@ -1,0 +1,27 @@
+<a
+  [routerLink]="['/productos', product().id]"
+  class="group flex flex-col overflow-hidden rounded-2xl border border-border bg-background transition hover:-translate-y-0.5 hover:border-primary hover:shadow-[var(--shadow-soft)]"
+>
+  <div class="aspect-square overflow-hidden bg-surface">
+    <img
+      [src]="product().image"
+      [alt]="product().imageAlt"
+      loading="lazy"
+      class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+    />
+  </div>
+  <div class="flex flex-1 flex-col p-5">
+    <span
+      class="text-[11px] font-semibold uppercase tracking-wider"
+      [style.color]="product().accentColor"
+    >
+      {{ product().category }}
+    </span>
+    <h3 class="mt-1.5 text-base font-bold leading-snug text-foreground">{{ product().name }}</h3>
+    <p class="mt-2 line-clamp-2 text-sm text-muted-foreground">{{ product().tagline }}</p>
+    <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
+      Ver detalles
+      <lucide-angular [img]="ArrowRight" class="h-3.5 w-3.5"></lucide-angular>
+    </span>
+  </div>
+</a>

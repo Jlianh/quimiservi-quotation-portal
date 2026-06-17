@@ -1,0 +1,107 @@
+@let item = product();
+
+<div class="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
+  <a routerLink="/productos" class="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary">
+    <lucide-angular [img]="ArrowLeft" class="h-4 w-4"></lucide-angular>
+    Volver al catálogo
+  </a>
+</div>
+
+@if (item) {
+  <section class="mx-auto grid max-w-7xl gap-10 px-4 py-10 sm:px-6 md:py-14 lg:grid-cols-2 lg:px-8">
+    <div class="overflow-hidden rounded-3xl border border-border bg-surface">
+      <img [src]="item.image" [alt]="item.imageAlt" class="aspect-square w-full object-cover" />
+    </div>
+
+    <div>
+      <span
+        class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-white"
+        [style.background-color]="item.accentColor"
+      >
+        {{ item.category }}
+      </span>
+      <h1 class="mt-3 text-3xl font-extrabold leading-tight text-foreground sm:text-4xl">{{ item.name }}</h1>
+      <p class="mt-4 text-base leading-relaxed text-muted-foreground">{{ item.description }}</p>
+
+      <div class="mt-6">
+        <h3 class="text-sm font-semibold text-foreground">Presentación</h3>
+        <div class="mt-2 flex flex-wrap gap-2">
+          @for (option of item.presentations; track option) {
+            <button
+              type="button"
+              (click)="selectedPresentation.set(option)"
+              class="rounded-md border px-3 py-2 text-sm font-medium transition"
+              [class]="option === presentation()
+                ? 'border-primary bg-primary/5 text-primary'
+                : 'border-border bg-background text-foreground/80 hover:border-primary'"
+            >
+              {{ option }}
+            </button>
+          }
+        </div>
+      </div>
+
+      <div class="mt-6 flex flex-wrap items-center gap-4">
+        <app-quantity-stepper
+          [value]="quantity()"
+          [size]="44"
+          (valueChange)="quantity.set($event)"
+        />
+        <button
+          type="button"
+          (click)="addToQuote()"
+          class="inline-flex flex-1 items-center justify-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-primary/90 sm:flex-none"
+        >
+          <lucide-angular [img]="ShoppingCart" class="h-4 w-4"></lucide-angular>
+          Agregar a cotización
+        </button>
+      </div>
+
+      <div class="mt-8 grid gap-3 sm:grid-cols-3">
+        @for (badge of badges; track badge.label) {
+          <div class="flex items-center gap-2.5 rounded-xl border border-border bg-surface px-3.5 py-3 text-xs font-medium text-foreground">
+            <lucide-angular [img]="badge.icon" class="h-4 w-4 text-primary"></lucide-angular>
+            {{ badge.label }}
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Características -->
+  <section class="mx-auto max-w-7xl px-4 pb-6 sm:px-6 lg:px-8">
+    <h2 class="text-xl font-bold text-foreground">Características</h2>
+    <div class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      @for (feature of item.features; track feature.title) {
+        <div class="rounded-2xl border border-border bg-background p-5">
+          <span
+            class="grid h-9 w-9 place-items-center rounded-lg text-white"
+            [style.background-color]="item.accentColor"
+          >
+            <lucide-angular [img]="Check" class="h-5 w-5"></lucide-angular>
+          </span>
+          <h3 class="mt-4 text-sm font-bold text-foreground">{{ feature.title }}</h3>
+          <p class="mt-1 text-xs leading-relaxed text-muted-foreground">{{ feature.description }}</p>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Usos recomendados -->
+  <section class="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
+    <h2 class="text-xl font-bold text-foreground">Usos recomendados</h2>
+    <ul class="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+      @for (use of item.uses; track use) {
+        <li class="flex items-start gap-2 rounded-xl border border-border bg-surface px-4 py-3 text-sm text-foreground">
+          <lucide-angular [img]="Check" class="mt-0.5 h-4 w-4 shrink-0 text-primary"></lucide-angular>
+          {{ use }}
+        </li>
+      }
+    </ul>
+  </section>
+} @else {
+  <div class="mx-auto max-w-3xl px-4 py-24 text-center">
+    <h1 class="text-2xl font-bold text-foreground">Producto no encontrado</h1>
+    <a routerLink="/productos" class="mt-4 inline-block text-primary hover:underline">Volver al catálogo</a>
+  </div>
+}

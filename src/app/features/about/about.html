@@ -1,0 +1,105 @@
+<!-- Quiénes somos -->
+<section class="border-b border-border bg-surface">
+  <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 md:py-20 lg:px-8">
+    <p class="text-xs font-semibold uppercase tracking-wider text-primary">Inicio · Quiénes somos</p>
+    <h1 class="mt-2 text-3xl font-extrabold text-foreground sm:text-4xl md:text-5xl">¿Quiénes somos?</h1>
+
+    <div class="mt-10 grid gap-8 lg:grid-cols-5">
+      <div class="space-y-4 text-[15px] leading-relaxed text-muted-foreground lg:col-span-3">
+        <p>
+          En <strong class="text-foreground">{{ company.name }}</strong> somos una empresa
+          colombiana con más de {{ company.yearsOfExperience }} años de experiencia en la
+          fabricación de productos de aseo industrial e institucional. Nuestro compromiso con la
+          calidad, la innovación y la sostenibilidad nos ha permitido posicionarnos como un
+          referente confiable en el sector.
+        </p>
+        <p>
+          A lo largo de nuestra trayectoria, hemos consolidado alianzas estratégicas en las que
+          operamos como fabricantes, proveedores y maquiladores, adaptándonos a las necesidades
+          específicas de cada cliente y sector.
+        </p>
+        <p>
+          Contribuimos al desarrollo nacional a través de productos de alta calidad y un enfoque
+          centrado en el desarrollo humano y el respeto por el medio ambiente, fortaleciendo el
+          crecimiento responsable y sostenible del país.
+        </p>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2 lg:col-span-2">
+        @for (card of about; track card.title) {
+          <div class="rounded-2xl border border-border bg-background p-5">
+            <span class="grid h-10 w-10 place-items-center rounded-xl bg-primary/10 text-primary">
+              <lucide-angular [img]="card.icon" class="h-5 w-5"></lucide-angular>
+            </span>
+            <h3 class="mt-4 text-sm font-bold text-foreground">{{ card.title }}</h3>
+            <p class="mt-1 text-xs leading-relaxed text-muted-foreground">{{ card.description }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Visión -->
+<section class="bg-accent/30">
+  <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
+    <div class="mx-auto max-w-3xl text-center">
+      <h2 class="text-3xl font-extrabold text-foreground sm:text-4xl">Nuestra visión</h2>
+      <div class="mx-auto mt-3 h-1 w-16 rounded-full bg-primary"></div>
+      <div class="mt-8 rounded-2xl border border-border bg-background p-6 text-left text-[15px] leading-relaxed text-muted-foreground sm:p-8">
+        En <strong class="text-foreground">{{ company.name }}</strong>, como fabricantes,
+        proyectamos una visión centrada en ofrecer siempre la mejor calidad, a través de
+        procesos innovadores y responsables. Buscamos alcanzar una producción sostenible que
+        respete el medio ambiente y contribuya al bienestar de la sociedad, con un monitoreo
+        constante de nuestros procesos para garantizar la excelencia y mantenernos a la
+        vanguardia del sector.
+      </div>
+    </div>
+
+    <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      @for (card of vision; track card.title) {
+        <div class="rounded-2xl border border-border bg-background p-6 text-center">
+          <span class="mx-auto grid h-12 w-12 place-items-center rounded-full border border-primary/30 text-primary">
+            <lucide-angular [img]="card.icon" class="h-5 w-5"></lucide-angular>
+          </span>
+          <h3 class="mt-4 text-sm font-bold text-foreground">{{ card.title }}</h3>
+          <p class="mt-1 text-xs leading-relaxed text-muted-foreground">{{ card.description }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Misión -->
+<section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
+  <div class="mx-auto max-w-3xl text-center">
+    <h2 class="text-3xl font-extrabold text-foreground sm:text-4xl">Nuestra misión</h2>
+    <div class="mx-auto mt-3 h-1 w-16 rounded-full bg-primary"></div>
+  </div>
+
+  <div class="mx-auto mt-10 max-w-4xl space-y-4 rounded-3xl bg-navy p-8 text-[15px] leading-relaxed text-white/85 sm:p-10">
+    <p>
+      Con más de {{ company.yearsOfExperience }} años de experiencia en el mercado, en
+      <strong class="text-white">{{ company.name }}</strong> nos especializamos en la producción
+      y distribución técnica de productos líquidos para la limpieza, certificados y respaldados
+      por nuestro registro de capacidad otorgado por el INVIMA.
+    </p>
+    <p>
+      Reafirmamos nuestro compromiso con el crecimiento sostenible de empresas, industrias,
+      instituciones y comercios, promoviendo el desarrollo de productos de aseo efectivos,
+      seguros y respetuosos con el entorno.
+    </p>
+    <p>
+      Nuestra misión es seguir avanzando con un equipo humano altamente capacitado y un enfoque
+      constante en la innovación tecnológica, para seguir siendo referentes de calidad y
+      responsabilidad ambiental en la industria.
+    </p>
+    <div class="pt-2">
+      <a routerLink="/cotizacion" class="inline-flex items-center gap-2 rounded-md bg-white px-5 py-3 text-sm font-semibold text-navy hover:bg-white/90">
+        <lucide-angular [img]="BadgeCheck" class="h-4 w-4 text-primary"></lucide-angular>
+        Solicitar cotización
+        <lucide-angular [img]="ArrowRight" class="h-4 w-4"></lucide-angular>
+      </a>
+    </div>
+  </div>
+</section>

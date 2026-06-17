@@ -1,0 +1,24 @@
+<div class="inline-flex items-center rounded-md border border-border bg-background">
+  <button
+    type="button"
+    class="grid place-items-center text-foreground hover:bg-muted disabled:opacity-40"
+    [style.height.px]="size()"
+    [style.width.px]="size()"
+    [disabled]="value() <= min()"
+    aria-label="Disminuir"
+    (click)="change(value() - 1)"
+  >
+    <lucide-angular [img]="Minus" class="h-3.5 w-3.5"></lucide-angular>
+  </button>
+  <span class="text-center text-sm font-semibold" [style.width.px]="size() + 4">{{ value() }}</span>
+  <button
+    type="button"
+    class="grid place-items-center text-foreground hover:bg-muted"
+    [style.height.px]="size()"
+    [style.width.px]="size()"
+    aria-label="Aumentar"
+    (click)="change(value() + 1)"
+  >
+    <lucide-angular [img]="Plus" class="h-3.5 w-3.5"></lucide-angular>
+  </button>
+</div>
