@@ -1,7 +1,7 @@
 /**
  * Domain model for a Quimiservi product.
  *
- * The catalogue currently ships four real products (laundry line). The shape is
+ * The catalogue ships the real Quimiservi product line. The shape is
  * intentionally richer than the demo needs so the same model can back an
  * e-commerce variant later (pricing, stock, etc.) without breaking callers.
  */
@@ -9,7 +9,11 @@ export type ProductCategory =
   | 'Detergentes'
   | 'Blanqueadores'
   | 'Desengrasantes'
-  | 'Suavizantes';
+  | 'Suavizantes'
+  | 'Desincrustantes'
+  | 'Desinfectantes'
+  | 'Cuidado de pisos'
+  | 'Cuidado automotriz';
 
 /** A single selling point shown on the product detail page. */
 export interface ProductFeature {
@@ -31,9 +35,14 @@ export interface Product {
   readonly uses: readonly string[];
   readonly presentations: readonly string[];
   readonly features: readonly ProductFeature[];
-  /** Path to the in-context product photo (served from /public). */
+  /** Path to the clean product photo shown on cards/previews (served from /public). */
   readonly image: string;
   readonly imageAlt: string;
+  /**
+   * Optional wide marketing graphic shown on the product detail page. When
+   * absent the detail page falls back to {@link image}.
+   */
+  readonly banner?: string;
   /** Per-line accent colour taken from the printed label. */
   readonly accentColor: string;
   readonly certifications: readonly string[];

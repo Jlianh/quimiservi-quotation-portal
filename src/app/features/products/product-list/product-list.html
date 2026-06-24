@@ -7,14 +7,15 @@
       presentación profesional y soporte técnico incluido.
     </p>
 
-    <div class="mt-8 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-      <div class="relative max-w-md lg:flex-1">
-        <lucide-angular [img]="Search" class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"></lucide-angular>
+    <div class="mt-8 space-y-5">
+      <div class="relative">
+        <lucide-angular [img]="Search" class="pointer-events-none absolute left-2 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground"></lucide-angular>
         <input
           [value]="term()"
           (input)="onSearch($event)"
-          placeholder="Buscar producto…"
-          class="w-full rounded-md border border-border bg-background py-2.5 pl-9 pr-3 text-sm text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+          placeholder="Buscar por nombre o marca…"
+          aria-label="Buscar producto"
+          class="w-full rounded-xl border border-border bg-background py-3.5 pl-12 pr-4 text-base text-foreground shadow-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
         />
       </div>
       <div class="flex flex-wrap gap-2">

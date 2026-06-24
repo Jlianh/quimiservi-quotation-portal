@@ -22,6 +22,10 @@
   /* footer, CTA, mission band  */
   --color-navy-foreground: #eaf1fb;
 
+  /* Hero gradient banner (dark) + its accent */
+  --gradient-hero: linear-gradient(135deg, oklch(0.18 0.04 264), oklch(0.28 0.12 258));
+  --color-hero-accent: oklch(0.75 0.14 250);
+
   /* Neutrals */
   --color-muted: #eef3f9;
   --color-muted-foreground: #57667f;
@@ -40,7 +44,8 @@
   --shadow-soft: 0 1px 2px 0 rgb(3 24 56 / 0.04), 0 8px 24px -12px rgb(3 24 56 / 0.12);
   --shadow-elevated: 0 2px 4px 0 rgb(3 24 56 / 0.05), 0 24px 48px -24px rgb(3 24 56 / 0.20);
 
-  --font-display: "Ethnocentric", var(--font-sans);
+  /* Company logo font — applied to the brand wordmark only, never body/headings */
+  --font-brand: "Neuropol", var(--font-sans);
 }
 
 @layer base {
@@ -60,7 +65,7 @@
   h2,
   h3,
   h4 {
-    font-family: var(--font-display);
+    font-family: var(--font-sans);
     letter-spacing: -0.02em;
   }
 
@@ -70,12 +75,14 @@
   }
 }
 
-/* Custom display font. Files in public/ are served from the site root, so the
-   URL is /fonts/... (NOT ../public/fonts/...). Kept at top level — @font-face
-   does not belong inside a @layer. */
+/* Company brand font (Neuropol) — used only for the header logo wordmark, not
+   for page headings (the client wants body copy and headings to stay legible).
+   Files in public/ are served from the site root, so the URL is /fonts/...
+   (NOT ../public/fonts/...). Kept at top level — @font-face does not belong
+   inside a @layer. */
 @font-face {
-  font-family: "Ethnocentric";
-  src: url("/fonts/Ethnocentric-Regular.woff2") format("woff2");
+  font-family: "Neuropol";
+  src: url("/fonts/Neuropol.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
   font-display: swap;

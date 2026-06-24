@@ -2,11 +2,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LucideAngularModule, Droplet, Mail, MapPin, Phone } from 'lucide-angular';
 import { COMPANY } from '../../core/data/company.data';
-import { BrandWordmark } from '../../shared/components/brand-wordmark/brand-wordmark';
 
 @Component({
   selector: 'app-footer',
-  imports: [RouterLink, LucideAngularModule, BrandWordmark],
+  imports: [RouterLink, LucideAngularModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './footer.html',
 })

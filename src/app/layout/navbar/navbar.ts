@@ -3,11 +3,10 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { LucideAngularModule, Droplet, Menu, X, ShoppingCart } from 'lucide-angular';
 import { QuoteStore } from '../../core/services/quote-store';
 import { COMPANY, NAV_LINKS } from '../../core/data/company.data';
-import { BrandWordmark } from '../../shared/components/brand-wordmark/brand-wordmark';
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink, RouterLinkActive, LucideAngularModule, BrandWordmark],
+  imports: [RouterLink, RouterLinkActive, LucideAngularModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './navbar.html',
 })
