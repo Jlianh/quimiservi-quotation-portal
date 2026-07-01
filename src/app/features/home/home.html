@@ -1,113 +1,177 @@
-<!-- Hero -->
-<section class="relative overflow-hidden border-b border-white/10 text-white"
-  style="background: var(--gradient-hero)">
-  <div aria-hidden
-    class="pointer-events-none absolute -top-32 -right-24 h-[420px] w-[420px] rounded-full bg-hero-accent/20 blur-3xl">
-  </div>
-  <div aria-hidden
-    class="pointer-events-none absolute -bottom-40 -left-24 h-[360px] w-[360px] rounded-full bg-hero-accent/10 blur-3xl">
-  </div>
+<!-- ───────────────────────── Hero (video background) ───────────────────────── -->
+<section class="relative overflow-hidden text-white" style="background: var(--gradient-hero)">
+  <!-- Brand video. Files in public/ are served from the site root, hence /banner/… -->
+  <video
+    #heroVideo
+    autoplay
+    muted
+    loop
+    playsinline
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-40"
+  >
+    <source src="/banner/banner.mp4" type="video/mp4" />
+  </video>
+  <!-- Legibility overlay so text stays readable over the video -->
+  <div
+    aria-hidden="true"
+    class="absolute inset-0"
+    style="background: linear-gradient(90deg, rgba(3,24,56,0.92), rgba(3,24,56,0.65) 55%, rgba(3,24,56,0.30))"
+  ></div>
 
-  <div class="relative mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 md:py-24 lg:grid-cols-12 lg:gap-8 lg:px-8">
-    <div class="lg:col-span-7">
-      <span
-        class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-medium text-hero-accent backdrop-blur-sm">
-        <lucide-angular [img]="BadgeCheck" class="h-3.5 w-3.5"></lucide-angular>
-        Certificado INVIMA · {{ company.yearsOfExperience }}+ años
-      </span>
-      <h1 class="mt-5 text-4xl font-extrabold leading-[1.05] text-white sm:text-5xl md:text-6xl">
-        Productos de Calidad
-        <span class="text-hero-accent">Quimiservi</span>.
-      </h1>
-      <p class="mt-5 max-w-xl text-base leading-relaxed text-white/70 sm:text-lg">
-        Productos químicos profesionales para limpieza, mantenimiento y desinfección. Compras online en Colombia.
-      </p>
-      <div class="mt-8 flex flex-wrap items-center gap-3">
-        <a routerLink="/productos"
-          class="inline-flex items-center gap-2 rounded-md bg-hero-accent px-5 py-3 text-sm font-semibold text-navy shadow-sm transition hover:brightness-110">
-          Ver productos
-          <lucide-angular [img]="ArrowRight" class="h-4 w-4"></lucide-angular>
-        </a>
-        <a routerLink="/nosotros"
-          class="inline-flex items-center gap-2 rounded-md border border-white/25 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-hero-accent hover:text-hero-accent">
-          Conoce Quimiservi
-        </a>
-      </div>
+  <div class="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 md:py-28 lg:px-8">
+    <span appReveal class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium text-white/90 backdrop-blur">
+      <lucide-angular [img]="BadgeCheck" class="h-3.5 w-3.5"></lucide-angular>
+      Fabricantes · Certificado INVIMA
+    </span>
 
-      <dl class="mt-10 grid max-w-md grid-cols-3 gap-4">
-        @for (stat of stats; track stat.label) {
-        <div class="rounded-xl border border-white/10 bg-white/5 p-4 text-center backdrop-blur-sm">
-          <dt class="text-2xl font-extrabold text-hero-accent">{{ stat.value }}</dt>
-          <dd class="mt-1 text-xs font-medium text-white/60">{{ stat.label }}</dd>
-        </div>
-        }
-      </dl>
+    <h1 [appReveal]="80" class="font-brand mt-6 text-[2rem] leading-none tracking-[0.04em] text-white sm:text-6xl sm:tracking-[0.08em] md:text-7xl">
+      QUIMISERVI
+    </h1>
+    <p [appReveal]="160" class="mt-3 text-lg font-semibold text-white/90 sm:text-xl">{{ company.tagline }}</p>
+
+    <p [appReveal]="240" class="mt-5 max-w-2xl text-base leading-relaxed text-white/75 sm:text-lg">
+      Blanqueadores, detergentes, desengrasantes, desinfectantes y cuidado de pisos.
+      Más de {{ productCount() }} productos certificados INVIMA para lavanderías, hoteles,
+      hospitales e industria.
+    </p>
+
+    <div [appReveal]="320" class="mt-8">
+      <a
+        routerLink="/productos"
+        class="inline-flex items-center gap-2 rounded-md bg-hero-accent px-6 py-3 text-sm font-semibold text-navy shadow-sm transition hover:brightness-110"
+      >
+        Ver catálogo
+        <lucide-angular [img]="ArrowRight" class="h-4 w-4"></lucide-angular>
+      </a>
     </div>
 
-    <!-- Real product line montage -->
-    <div class="lg:col-span-5">
-      <div
-        class="relative mx-auto max-w-md rounded-3xl border border-white/15 bg-white/5 p-2 shadow-[var(--shadow-elevated)] backdrop-blur-md">
-        <div class="grid grid-cols-2 gap-2">
-          @for (product of featured(); track product.id) {
-          <a [routerLink]="['/productos', product.id]" class="overflow-hidden rounded-2xl bg-white/10">
-            <img [src]="product.image" [alt]="product.imageAlt"
-              class="aspect-square w-full object-cover transition hover:scale-105" />
-          </a>
+    <dl [appReveal]="400" class="mt-12 flex flex-wrap items-end gap-x-6 gap-y-4">
+      @for (stat of heroStats; track stat.label; let first = $first) {
+        <div class="flex items-end gap-6">
+          @if (!first) {
+            <span aria-hidden="true" class="hidden h-10 w-px self-center bg-white/20 sm:block"></span>
           }
-        </div>
-        <div
-          class="absolute -bottom-5 left-1/2 flex w-[90%] -translate-x-1/2 items-center gap-3 rounded-2xl border border-white/15 bg-white/10 p-3 shadow-[var(--shadow-soft)] backdrop-blur-md">
-          <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-hero-accent/20 text-hero-accent">
-            <lucide-angular [img]="BadgeCheck" class="h-5 w-5"></lucide-angular>
-          </span>
-          <div class="min-w-0">
-            <p class="truncate text-sm font-semibold text-white text-wrap">Línea profesional de productos de aseo industrial y doméstico</p>
-            <p class="truncate text-xs text-white/60">Realiza tu cotización ahora</p>
+          <div class="text-center">
+            <dt class="text-2xl font-extrabold text-white sm:text-3xl">{{ stat.value }}</dt>
+            <dd class="mt-1 text-xs font-medium uppercase tracking-wider text-white/60">{{ stat.label }}</dd>
           </div>
         </div>
+      }
+    </dl>
+  </div>
+</section>
+
+<!-- ─────────────────────────── Featured showcase ──────────────────────────── -->
+<section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+  <div class="grid gap-5 lg:grid-cols-3">
+    <!-- Lead product -->
+    @if (featuredMain(); as product) {
+      <a
+        appReveal
+        [routerLink]="['/productos', product.id]"
+        class="group relative min-h-[320px] overflow-hidden rounded-3xl bg-navy lg:col-span-2"
+      >
+        <img
+          [src]="product.image"
+          [alt]="product.imageAlt"
+          class="absolute inset-0 h-full w-full object-cover opacity-80 transition duration-500 group-hover:scale-105"
+        />
+        <div aria-hidden="true" class="absolute inset-0" style="background: linear-gradient(180deg, transparent 30%, rgba(3,24,56,0.88))"></div>
+        <div class="relative flex h-full flex-col justify-end p-6 sm:p-8">
+          <span
+            class="inline-flex w-fit items-center rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-white"
+            [style.background-color]="product.accentColor"
+          >
+            {{ product.category }}
+          </span>
+          <h3 class="mt-3 text-2xl font-extrabold text-white sm:text-3xl">{{ product.brand }}</h3>
+          <p class="mt-2 max-w-md text-sm text-white/80">{{ product.tagline }}</p>
+        </div>
+      </a>
+    }
+
+    <!-- Right column -->
+    <div [appReveal]="120" class="grid gap-5">
+      <div class="rounded-3xl bg-primary p-6 text-white">
+        <p class="text-xs font-semibold uppercase tracking-wider text-white/70">Experiencia</p>
+        <p class="mt-3 text-4xl font-extrabold" [countUp]="company.yearsOfExperience"></p>
+        <p class="mt-1 text-sm text-white/80">años fabricando</p>
       </div>
+
+      @if (featuredSide(); as product) {
+        <a
+          [routerLink]="['/productos', product.id]"
+          class="group relative min-h-[150px] overflow-hidden rounded-3xl bg-navy"
+        >
+          <img
+            [src]="product.image"
+            [alt]="product.imageAlt"
+            class="absolute inset-0 h-full w-full object-cover opacity-70 transition duration-500 group-hover:scale-105"
+          />
+          <div aria-hidden="true" class="absolute inset-0" style="background: linear-gradient(180deg, transparent 25%, rgba(3,24,56,0.88))"></div>
+          <div class="relative flex h-full flex-col justify-end p-5">
+            <h3 class="text-lg font-bold text-white">{{ product.brand }}</h3>
+            <p class="text-xs text-white/70">Desengrasante industrial</p>
+          </div>
+        </a>
+      }
     </div>
   </div>
 
-  <!-- Trust ribbon: real brand icon lockups -->
-  <div class="border-t border-white/10 bg-white/5">
-    <div class="mx-auto grid max-w-7xl grid-cols-2 items-center gap-6 px-4 py-6 sm:px-6 md:grid-cols-4 lg:px-8">
-      @for (badge of trustBadges; track badge.icon) {
-      <img [src]="badge.icon" [alt]="badge.alt"
-        class="mx-auto h-12 w-auto object-contain opacity-90 brightness-0 invert md:h-14" />
-      }
+  <!-- INVIMA strip -->
+  <div appReveal class="mt-5 flex flex-col items-start gap-3 rounded-3xl bg-navy p-6 text-white sm:flex-row sm:items-center sm:gap-4">
+    <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-success text-white">
+      <lucide-angular [img]="BadgeCheck" class="h-5 w-5"></lucide-angular>
+    </span>
+    <div>
+      <p class="text-sm font-bold">Registro INVIMA</p>
+      <p class="text-sm text-white/70">
+        Capacidad de fabricación certificada · {{ company.yearsOfExperience }} años fabricando en Colombia
+      </p>
     </div>
   </div>
 </section>
 
-<!-- ¿Por qué elegirnos? -->
+<!-- ──────────────────────────── Stats band ────────────────────────────────── -->
+<section class="border-y border-border bg-surface">
+  <div class="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 py-12 sm:px-6 md:grid-cols-3 lg:px-8 text-center">
+    @for (stat of bandStats; track stat.label; let i = $index) {
+      <div [appReveal]="i * 90">
+        <p class="text-3xl font-extrabold text-primary sm:text-4xl">{{ stat.value }}</p>
+        <p class="mt-1 text-sm font-medium text-muted-foreground">{{ stat.label }}</p>
+      </div>
+
+      <hr class="my-4 border-t border-border sm:hidden" />
+    }
+  </div>
+</section>
+
+<!-- ─────────────────────────── ¿Por qué elegirnos? ─────────────────────────── -->
 <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-  <div class="mx-auto max-w-2xl text-center">
+  <div appReveal class="mx-auto max-w-2xl text-center">
     <h2 class="text-3xl font-extrabold text-foreground sm:text-4xl">¿Por qué elegir Quimiservi?</h2>
     <p class="mt-3 text-muted-foreground">
       {{ company.yearsOfExperience }} años fabricando productos químicos para el sector industrial e institucional.
     </p>
   </div>
   <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-    @for (benefit of benefits; track benefit.title) {
-    <div
-      class="group rounded-2xl border border-border bg-background p-6 transition hover:-translate-y-0.5 hover:border-primary hover:shadow-[var(--shadow-soft)]">
-      <span
-        class="grid h-12 w-12 place-items-center rounded-xl bg-primary/10 text-primary transition group-hover:bg-primary group-hover:text-white">
-        <lucide-angular [img]="iconFor(benefit.icon)" class="h-6 w-6"></lucide-angular>
-      </span>
-      <h3 class="mt-5 text-base font-bold text-foreground">{{ benefit.title }}</h3>
-      <p class="mt-1.5 text-sm leading-relaxed text-muted-foreground">{{ benefit.description }}</p>
-    </div>
+    @for (benefit of benefits; track benefit.title; let i = $index) {
+      <div [appReveal]="i * 90" class="group rounded-2xl border border-border bg-background p-6 transition hover:-translate-y-0.5 hover:border-primary hover:shadow-[var(--shadow-soft)]">
+        <span class="grid h-12 w-12 place-items-center rounded-xl bg-primary/10 text-primary transition group-hover:bg-primary group-hover:text-white">
+          <lucide-angular [img]="iconFor(benefit.icon)" class="h-6 w-6"></lucide-angular>
+        </span>
+        <h3 class="mt-5 text-base font-bold text-foreground">{{ benefit.title }}</h3>
+        <p class="mt-1.5 text-sm leading-relaxed text-muted-foreground">{{ benefit.description }}</p>
+      </div>
     }
   </div>
 </section>
 
-<!-- Productos -->
+<!-- ─────────────────────────── Productos destacados ────────────────────────── -->
 <section class="border-t border-border bg-surface">
   <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-    <div class="flex flex-wrap items-end justify-between gap-4">
+    <div appReveal class="flex flex-wrap items-end justify-between gap-4">
       <div>
         <h2 class="text-3xl font-extrabold text-foreground sm:text-4xl">Productos destacados</h2>
         <p class="mt-2 max-w-xl text-muted-foreground">
@@ -133,49 +197,32 @@
       </div>
     </div>
 
-    <div #productTrack
+    <div #productTrack [appReveal]="120"
       class="mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
       @for (product of products(); track product.id) {
-      <div class="shrink-0 basis-[82%] snap-start sm:basis-[46%] lg:basis-[31%] xl:basis-[23.5%]">
-        <app-product-card [product]="product" />
-      </div>
+        <div class="shrink-0 basis-[82%] snap-start sm:basis-[46%] lg:basis-[31%] xl:basis-[23.5%]">
+          <app-product-card [product]="product" />
+        </div>
       }
     </div>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-  <div
-    class="grid items-center gap-10 rounded-3xl border border-border bg-navy p-8 text-navy-foreground sm:p-12 lg:grid-cols-2">
+<!-- ──────────────────────────────── CTA ────────────────────────────────────── -->
+<section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+  <div appReveal class="grid items-center gap-8 rounded-3xl bg-primary p-8 text-white sm:p-12 lg:grid-cols-[1.6fr_1fr]">
     <div>
-      <span class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white/90">
-        <lucide-angular [img]="Leaf" class="h-3.5 w-3.5"></lucide-angular>
-        Compromiso ambiental
-      </span>
-      <h2 class="mt-4 text-3xl font-extrabold text-white sm:text-4xl">
-        Soluciones efectivas, seguras y respetuosas con el entorno.
-      </h2>
+      <h2 class="text-3xl font-extrabold sm:text-4xl">¿Listo para optimizar sus procesos de limpieza?</h2>
       <p class="mt-3 max-w-xl text-white/80">
-        Procesos innovadores, producción sostenible y monitoreo continuo para mantenernos a la
-        vanguardia del sector.
+        Arme su lista y nuestro equipo comercial lo contacta con una cotización a la medida.
       </p>
-      <div class="mt-6">
-        <a routerLink="/cotizacion"
-          class="inline-flex items-center gap-2 rounded-md bg-white px-5 py-3 text-sm font-semibold text-navy hover:bg-white/90">
-          Solicitar cotización
-          <lucide-angular [img]="ArrowRight" class="h-4 w-4"></lucide-angular>
-        </a>
-      </div>
     </div>
-    <ul class="grid gap-3 sm:grid-cols-2">
-      @for (value of values; track value) {
-      <li
-        class="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-medium text-white">
-        <lucide-angular [img]="BadgeCheck" class="h-4 w-4 text-white/80"></lucide-angular>
-        {{ value }}
-      </li>
-      }
-    </ul>
+    <div class="lg:justify-self-end">
+      <a routerLink="/cotizacion"
+        class="inline-flex items-center gap-2 rounded-md bg-white px-6 py-3 text-sm font-semibold text-primary shadow-sm transition hover:bg-white/90">
+        Solicitar cotización
+        <lucide-angular [img]="ArrowRight" class="h-4 w-4"></lucide-angular>
+      </a>
+    </div>
   </div>
 </section>

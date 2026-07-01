@@ -7,6 +7,8 @@ export interface CompanyInfo {
   readonly email: string;
   readonly address: string;
   readonly yearsOfExperience: number;
+  /** wa.me deep link for the floating WhatsApp button. */
+  readonly whatsappHref: string;
 }
 
 /** A primary navigation entry. */

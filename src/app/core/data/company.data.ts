@@ -8,6 +8,9 @@ export const COMPANY: CompanyInfo = {
   email: 'info@quimiservi.com',
   address: 'Bogotá, Colombia',
   yearsOfExperience: 25,
+  whatsappHref:
+    'https://wa.me/573115588584?text=' +
+    encodeURIComponent('Hola Quimiservi, quisiera solicitar una cotización.'),
 };
 
 export const NAV_LINKS: readonly NavLink[] = [
